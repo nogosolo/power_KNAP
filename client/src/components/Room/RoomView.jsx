@@ -33,7 +33,7 @@ class RoomView extends React.Component {
 
   componentDidMount() {
     if (cookie.parse(document.cookie).user) {
-      this.setState({ user: cookie.parse(document.cookie).user }) 
+      this.setState({ user: cookie.parse(document.cookie).user })
     }
     this.renderRoom();
     roomSocket.on('default', () => this.setState({ currentVideo: undefined }));
@@ -110,6 +110,7 @@ class RoomView extends React.Component {
       .then(({ data }) => {
         const currentTime = Date.now();
         const timeLapsed = moment.duration(moment(currentTime).diff(data.start)).asSeconds();
+        console.log(timeLapsed, 'TIMELAPSED')
         this.setState({
           playlist: data.videos,
           currentVideo: data.videos[data.index],
@@ -139,7 +140,7 @@ class RoomView extends React.Component {
 
     return (
       <div className="room">
-        <div className="container navbar">fam.ly {view}</div>
+        <div className="container navbar">ferret{view}</div>
         {playlistComponent}
         <VideoPlayer
           currentVideo={this.state.currentVideo}
@@ -159,4 +160,6 @@ class RoomView extends React.Component {
   }
 }
 
-ReactDOM.render(<RoomView />, document.getElementById('room'));
+export default RoomView;
+
+// ReactDOM.render(<RoomView />, document.getElementById('room'));
