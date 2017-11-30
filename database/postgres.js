@@ -28,10 +28,9 @@ const Room = sequelize.define('room', {
 
 // Video.sync({ force: true });
 // Room.sync({ force: true });
-<<<<<<< HEAD
+
 // Playlist.sync({ force: true });
-=======
->>>>>>> add fb script to index.html
+
 
 const createVideoEntry = (videoData) => {
   const videoEntry = {
