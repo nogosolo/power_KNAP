@@ -18,13 +18,8 @@
       });
         
       FB.AppEvents.logPageView();  
-
-<<<<<<< HEAD
-      FB.getLoginStatus(function(response) {
-=======
        FB.getLoginStatus(function(response) {
         console.log('FB.getLoginStatus response:', response);
->>>>>>> fix auto update the login status, also intergete fb login button with logout function
         if (response.status === 'connected') {
           document.getElementById('status').innerHTML = 'We are connected.';
           document.getElementById('login').style.visibility = 'hidden';
