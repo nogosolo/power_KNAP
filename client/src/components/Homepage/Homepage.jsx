@@ -12,7 +12,7 @@ const PreviewRoom = (props) => (
   <div clasName="panel" onClick={()=> console.log('clicked!')}>
     <div className="op">
       <img  className={'pic5'} src={'https://static.pexels.com/photos/110854/pexels-photo-110854.jpeg'}/> 
-      <h1>Room Number {props.ex} </h1>  
+      <h1>Room Number {props.ex} </h1> 
     </div>
   </div>
 
