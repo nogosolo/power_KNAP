@@ -23,6 +23,7 @@ const VideoPlayer = ({ currentVideo, opts, onReady, onStateChange }) => {
   }
   return (
     <div className="container videoplayer">
+      <img src="https://www.reaconverter.com/howto/wp-content/uploads/2015/10/banana.gif" alt="pizza boy" />
     </div>
   );
 };
@@ -34,4 +35,4 @@ VideoPlayer.propTypes = {
 };
 
 export default VideoPlayer;
-      // <img src="https://www.reaconverter.com/howto/wp-content/uploads/2015/10/banana.gif" alt="pizza boy" />
+     
