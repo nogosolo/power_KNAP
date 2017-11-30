@@ -10,7 +10,7 @@ const SiteNavBar = (props) => (
   <a class="active"><Link to="/" >Home</Link></a>
   <a ><Link to="/rooms">Room</Link></a>
   <a ><Link to="/javi">JAVI LINK</Link></a>
-  <a ><FBLogin /></a>
+  <FBLogin />
 </div>
       <span className="login">Welcome, put state here <a href="/auth/logout">Logout</a></span>
       <span className="login">Login with <a href="/auth/google">Google</a></span>
