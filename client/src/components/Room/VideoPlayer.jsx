@@ -35,4 +35,3 @@ VideoPlayer.propTypes = {
 };
 
 export default VideoPlayer;
-     
