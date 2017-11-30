@@ -12,9 +12,19 @@ import ChatView from './ChatView';
 const roomSocket = io('/room');
 
 class RoomView extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
+      roomstate: {
+        currentVideo: undefined,
+        playlist: [],
+        startOptions: null,
+        isHost: false,
+        message: '',
+        username: '',
+        user: null,
+      },
+      
       currentVideo: undefined,
       playlist: [],
       startOptions: null,

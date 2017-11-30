@@ -16,7 +16,7 @@ import Javi from '../Homepage/Javi';
 const Main = props => (
   <main>
     <Switch>
-      <Route exact path="/" component={HomePage} />
+      <Route exact path="/" render={() => (<HomePage filterRooms={props.filterRooms}/>)} />
          <Route
         path="/javi"
         render={() => (<Javi />)}
@@ -24,7 +24,7 @@ const Main = props => (
       {/* <Route path="/signup" component={SignupPage} /> */}
       <Route
         path="/rooms"
-        render={() => (<RoomView />)}
+        render={() => (<RoomView id={props.selectedRoom}/>)}
       />
       {/* <Route path="/match" render={() => <MatchPage userId={props.userdata.userid} />} />
       <Route
