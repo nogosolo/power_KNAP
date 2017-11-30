@@ -28,6 +28,7 @@ app.use('/auth', authRoutes);
 
 // Room HTTP Requests
 app.get('/renderRoom', (req, res) => {
+  console.log('RENDER ROOM')
   const roomProperties = {};
   db.findVideos()
     .then((videos) => { roomProperties.videos = videos; })
@@ -48,7 +49,7 @@ app.get('/search', (req, res) => {
 
 app.patch('/playNext/:length', (req, res) => {
   const roomPlaylistLength = Number(req.params.length);
-
+  console.log('here', req.params.length)
   const sendIndex = ({ indexKey }) => {
     roomSpace.emit('playNext', indexKey);
   };
