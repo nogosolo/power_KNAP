@@ -29,7 +29,6 @@ const Room = sequelize.define('room', {
 // Room.sync({ force: true });
 // Playlist.sync({ force: true });
 
-
 const createVideoEntry = (videoData) => {
   const videoEntry = {
     videoName: videoData.title,
