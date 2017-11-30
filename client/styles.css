@@ -1,6 +1,6 @@
 body {
   margin: 0 auto;
-  color: grey;
+  color: white;
   /*background: #17191D;*/
   font-family: 'Raleway', sans-serif;
   font-size: 11px;
@@ -298,23 +298,16 @@ body {
    object-fit: contain;
    border: 1px solid white;
 }
+.pic5:hover{
+  border: 1px solid red;
+
+}
 *,
 *:before,
 *:after {
   box-sizing: border-box;
 }
 
-body {
-  margin: 40px;
-  font-family: 'Open Sans', 'sans-serif';
-  background-color: #fff;
-  color: #444;
-}
-
-h1,
-p {
-  margin: 0 0 1em 0;
-}
 
 .wrapper {
   max-width: 1240px;
