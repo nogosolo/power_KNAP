@@ -8,11 +8,21 @@ import Sidebar from './Sidebar.jsx';
 //
 // const lobby = io('/lobby');
 
+const PreviewRoom = (props) => (
+  <div clasName="panel" onClick={()=> console.log('clicked!')}>
+    <div className="op">
+      <img  className={'pic5'} src={'https://static.pexels.com/photos/110854/pexels-photo-110854.jpeg'}/> 
+      <h1>Room Number {props.ex} </h1> 
+    </div>
+  </div>
+
+)
+
 class Homepage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      roomList: ['Room1', 'Room2', 'Room3'],
+      roomList: [1,2,3,4,5,6,7,8],
     };
   }
 
@@ -22,10 +32,12 @@ class Homepage extends React.Component {
   render() {
     return (
       <div>
-        <h1>Fam.ly</h1>
-        {/* <Search /> */}
-        <RoomList rooms={this.state.roomList} />
-        <Sidebar />
+        <h1>Browse Rooms</h1>  
+          <div className="wrapper">
+            {this.state.roomList.map((el,key) => <PreviewRoom ex={el} />)}
+            
+
+          </div>
       </div>
     );
   }
