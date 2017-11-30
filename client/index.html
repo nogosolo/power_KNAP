@@ -7,7 +7,7 @@
   
 </head>
 <body>
-  <script>
+ <!--  <script>
     // initialze and setup facebook js sdk 
     window.fbAsyncInit = function() {
       FB.init({
@@ -74,14 +74,14 @@
          document.getElementById('status').innerHTML = "<img src='" + response.picture.data.url + "'>";
        });
      }
-  </script>
+  </script> -->
 
   <div id="root"></div>
   <div id="status"></div>
-  <button onclick="getInfo()">Get info with picture</button>
+<!--   <button onclick="getInfo()">Get info with picture</button>
   <button onclick="login()" id="login">Login</button>
 
-  <div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="true" data-use-continue-as="true" onlogin="checkLoginState();"></div>
+  <div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="true" data-use-continue-as="true" onlogin="checkLoginState();"></div> -->
 
   <script src="dist/bundle.js"></script>
   <script src="/socket.io-client/dist/socket.io.js"></script>

@@ -280,8 +280,10 @@ body {
     color: white;
 }
 
-
-
+/* Change the location of Facebook login button */
+.topnav a.fbbtn {
+  float: right;
+}
 
 
 .landing {
