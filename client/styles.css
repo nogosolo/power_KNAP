@@ -282,6 +282,10 @@ body {
 
 
 
+/* Change the location of Facebook login button */
+.topnav a.fbbtn {
+  float: right;
+}
 
 
 .landing {
@@ -365,9 +369,9 @@ body {
   }
 }
 
+
 .op{
   opacity: 0.8;
-
 }
 
 .op:hover{
