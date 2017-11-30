@@ -7,7 +7,42 @@
   
 </head>
 <body>
+  <script>
+    // initialze and setup facebook js sdk 
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId      : '168772223720117',
+        cookie     : true,
+        xfbml      : true,
+        version    : 'v2.11'
+      });
+        
+      FB.AppEvents.logPageView();  
+
+      FB.getLoginStatus(function(response) {
+        if (response.status === 'connected') {
+          document.getElementById('status').innerHTML = 'You are connected.';
+        } else if (response.status === 'not_authorized') {
+          document.getElementById('status').innerHTML = 'You are not logged in.';
+        } else {
+          document.getElementById('status').innerHTML = 'You are not logged into facebook.';
+        }
+      })
+        
+    };
+
+    (function(d, s, id){
+       var js, fjs = d.getElementsByTagName(s)[0];
+       if (d.getElementById(id)) {return;}
+       js = d.createElement(s); js.id = id;
+       js.src = "https://connect.facebook.net/en_US/sdk.js";
+       fjs.parentNode.insertBefore(js, fjs);
+     }(document, 'script', 'facebook-jssdk'));
+  </script>
+
   <div id="root"></div>
+  <div id="homepage"></div>
+  <div id="room"></div>
 
   <script src="dist/bundle.js"></script>
   <script src="/socket.io-client/dist/socket.io.js"></script>
