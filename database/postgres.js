@@ -14,7 +14,6 @@ const Videos = sequelize.define('videos', {
   creator: Sequelize.STRING,
   url: Sequelize.STRING,
   description: Sequelize.STRING,
-  room: Sequelize.INTEGER,
 });
 
 const Users = sequelize.define('users', {
