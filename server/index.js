@@ -27,6 +27,19 @@ app.use(passport.session());
 app.use('/auth', authRoutes);
 
 // Room HTTP Requests
+app.get('/allrooms', (req, res) => {
+  console.log('a room request was received');
+  const allRoomNames = [];
+  db.getRoomNames()
+    .then((rooms) => {
+      rooms.forEach((room) => {
+        console.log('----------------------', room.dataValues.roomName, '-----------------------------');
+        allRoomNames.push(room);
+      })
+    })
+    .then(() => {res.end(JSON.stringify(allRoomNames))});
+})
+
 app.get('/renderRoom', (req, res) => {
   console.log('RENDER ROOM')
   const roomProperties = {};

@@ -1,6 +1,8 @@
 import React from 'react';
 import SiteNavBar from './SiteNavBar';
 import Main from './Main';
+import axios from 'axios';
+
 // import LoginPage from './LoginPage';
 
 class App extends React.Component {
@@ -20,8 +22,18 @@ class App extends React.Component {
     this.setState({selectedRoom: id});
   }
 
-  createRoom(roomname) {
-    console.log('in the app',roomname);
+  createRoom(roomName) {
+    console.log('in the app',roomName);
+  }
+
+  componentDidMount() {
+    axios.get('/allrooms')
+      .then((data) => {
+        //data = JSON.parse(data);
+        console.log('HEY!!!!!!!!', data);
+        this.setState({allRooms: data.data});
+      })
+      .catch((err) => {console.log(err)})
   }
 
   render() {
