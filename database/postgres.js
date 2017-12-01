@@ -60,11 +60,11 @@ const createVideoEntry = (videoData) => {
 };
 
 // Room Queries
-const getRoomProperties = () => Rooms.findById(1).then(room => room.dataValues);
-const incrementIndex = () => Rooms.findById(1).then(room => room.increment('indexKey'));
-const resetRoomIndex = () => Rooms.findById(1).then(room => room.update({ indexKey: 0 }));
-const getIndex = () => Rooms.findById(1).then(room => room.dataValues.indexKey);
-const setStartTime = () => Rooms.findById(1).then(room => room.update({ startTime: Date.now() }));
+const getRoomProperties = roomId => Rooms.findById(roomId).then(room => room.dataValues);
+const incrementIndex = roomId => Rooms.findById(roomId).then(room => room.increment('indexKey'));
+const resetRoomIndex = roomId => Rooms.findById(roomId).then(room => room.update({ indexKey: 0 }));
+const getIndex = roomId => Rooms.findById(roomId).then(room => room.dataValues.indexKey);
+const setStartTime = roomId => Rooms.findById(roomId).then(room => room.update({ startTime: Date.now() }));
 
 // Video Queries
 const findVideos = () => Videos.findAll();

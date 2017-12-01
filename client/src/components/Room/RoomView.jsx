@@ -10,7 +10,7 @@ import Search from './Search';
 import ChatView from './ChatView';
 
 const roomSocket = io('/room');
-
+const superUniqueWord = 4;
 class RoomView extends React.Component {
   constructor(props) {
     super(props);
@@ -24,7 +24,7 @@ class RoomView extends React.Component {
         username: '',
         user: null,
       },
-      
+
       currentVideo: undefined,
       playlist: [],
       startOptions: null,
