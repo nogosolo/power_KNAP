@@ -8,7 +8,7 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      allRooms: [{id:1, roomname:'first'}, {id:2, roomName:'second'}, {id:3, roomName:'third'} ,{id:4, roomName:'fourth'}],
+      allRooms: [{id:1, roomName:'first'}, {id:2, roomName:'second'}, {id:3, roomName:'third'} ,{id:4, roomName:'fourth'}],
       selectedRoom: {id:null, roomName:null},
     };
     this.selectRoom = this.selectRoom.bind(this);
