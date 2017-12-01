@@ -157,8 +157,9 @@ if (roomSpace[req.params.roomId] !== undefined) {
         console.log(`A user has disconnected from ${roomSpace[req.params.roomId].name}`);
         return (newHost === roomHost) ? null : giveHostStatus(newHost);
       }
+      const roomName = roomSpace[req.params.roomId].name;
       delete roomSpace[req.params.roomId]; // might not need
-      console.log(`${roomSpace[req.params.roomId].name} is now empty`);
+      console.log(`${roomName} is now empty`);
     });
   });
   res.send(`Room Connected to RoomId: ${req.params.roomId}`);
