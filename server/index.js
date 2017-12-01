@@ -41,8 +41,8 @@ app.get('/allrooms', (req, res) => {
     .then(() => {res.end(JSON.stringify(allRoomNames))});
 })
 
-app.get('/renderRoom', (req, res) => {
-  console.log('RENDER ROOM')
+app.get('/renderRoom/:roomId', (req, res) => {
+  console.log(`RENDER ROOM ${req.params.roomId}`)
   const roomProperties = {};
   db.findVideos()
     .then((videos) => { roomProperties.videos = videos; })
