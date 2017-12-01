@@ -9,27 +9,43 @@ sequelize.authenticate()
   .then(() => console.log('Connection has been established successfully'))
   .catch(err => console.error('Unable to connect to database:', err));
 
-const Video = sequelize.define('video', {
+const Videos = sequelize.define('videos', {
   videoName: Sequelize.STRING,
   creator: Sequelize.STRING,
   url: Sequelize.STRING,
   description: Sequelize.STRING,
-  room: Sequelize.INTEGER,
 });
 
-const Playlist = sequelize.define('playlist', {
-  playlistName: Sequelize.STRING,
+const Users = sequelize.define('users', {
+  fbId: Sequelize.STRING,
+  firstName: Sequelize.STRING,
+  lastName: Sequelize.STRING,
 });
+
+// const Playlist = sequelize.define('playlist', {
+//   playlistName: Sequelize.STRING,
+// });
 
 // TODO we will need to refer to the Room ID when there are multiple room instances
-const Room = sequelize.define('room', {
+const Rooms = sequelize.define('rooms', {
   indexKey: Sequelize.INTEGER,
   startTime: Sequelize.DATE,
+  roomName: Sequelize.STRING,
 });
 
-// Video.sync({ force: true });
-// Room.sync({ force: true });
-// Playlist.sync({ force: true });
+const UsersRooms = sequelize.define('users_rooms', {});
+
+
+// Users.sync({ force: true });
+// Rooms.sync({ force: true });
+
+UsersRooms.belongsTo(Users);
+UsersRooms.belongsTo(Rooms);
+Videos.belongsTo(Rooms);
+
+// Videos.sync({ force: true });
+// UsersRooms.sync({ force: true });
+
 
 const createVideoEntry = (videoData) => {
   const videoEntry = {
@@ -38,19 +54,19 @@ const createVideoEntry = (videoData) => {
     url: videoData.url,
     description: videoData.description,
   };
-  return Video.create(videoEntry); // returns a promise when called
+  return Videos.create(videoEntry); // returns a promise when called
 };
 
 // Room Queries
-const getRoomProperties = () => Room.findById(1).then(room => room.dataValues);
-const incrementIndex = () => Room.findById(1).then(room => room.increment('indexKey'));
-const resetRoomIndex = () => Room.findById(1).then(room => room.update({ indexKey: 0 }));
-const getIndex = () => Room.findById(1).then(room => room.dataValues.indexKey);
-const setStartTime = () => Room.findById(1).then(room => room.update({ startTime: Date.now() }));
+const getRoomProperties = () => Rooms.findById(1).then(room => room.dataValues);
+const incrementIndex = () => Rooms.findById(1).then(room => room.increment('indexKey'));
+const resetRoomIndex = () => Rooms.findById(1).then(room => room.update({ indexKey: 0 }));
+const getIndex = () => Rooms.findById(1).then(room => room.dataValues.indexKey);
+const setStartTime = () => Rooms.findById(1).then(room => room.update({ startTime: Date.now() }));
 
 // Video Queries
-const findVideos = () => Video.findAll();
-const removeFromPlaylist = title => Video.find({ where: { videoName: title } }).then(video => video.destroy());
+const findVideos = () => Videos.findAll();
+const removeFromPlaylist = title => Videos.find({ where: { videoName: title } }).then(video => video.destroy());
 
 exports.createVideoEntry = createVideoEntry;
 exports.getRoomProperties = getRoomProperties;
