@@ -29,8 +29,11 @@ class App extends React.Component {
   componentDidMount() {
     axios.get('/allrooms')
       .then((data) => {
-        //this.setState({allRooms: data});
+        //data = JSON.parse(data);
+        console.log('HEY!!!!!!!!', data);
+        this.setState({allRooms: data.data});
       })
+      .catch((err) => {console.log(err)})
   }
 
   render() {
