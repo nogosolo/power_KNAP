@@ -33,7 +33,7 @@ app.get('/allrooms', (req, res) => {
   db.getRoomNames()
     .then((rooms) => {
       rooms.forEach((room) => {
-        console.log('----------------------', room, '-----------------------------');
+        console.log('----------------------', room.dataValues.roomName, '-----------------------------');
         allRoomNames.push(room);
       })
     })

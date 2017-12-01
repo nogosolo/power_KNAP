@@ -22,13 +22,14 @@ class App extends React.Component {
     this.setState({selectedRoom: id});
   }
 
-  createRoom(roomname) {
-    console.log('in the app',roomname);
+  createRoom(roomName) {
+    console.log('in the app',roomName);
+  }
 
   componentDidMount() {
     axios.get('/allrooms')
       .then((data) => {
-        this.setState({allRooms: data});
+        //this.setState({allRooms: data});
       })
   }
 
