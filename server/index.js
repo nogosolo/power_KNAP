@@ -43,6 +43,7 @@ app.get('/allrooms', (req, res) => {
 
 app.get('/renderRoom/:roomId', (req, res) => {
   console.log(`RENDER ROOM ${req.params.roomId}`)
+
   const roomProperties = {};
   db.findVideos()
     .then((videos) => { roomProperties.videos = videos; })
