@@ -38,7 +38,7 @@ app.get('/allrooms', (req, res) => {
         allRoomNames.push(room);
       })
     })
-  res.end();
+    .then(() => {res.end(JSON.stringify(allRoomNames))});
 })
 
 app.get('/renderRoom', (req, res) => {
