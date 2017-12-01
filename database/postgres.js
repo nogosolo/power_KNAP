@@ -14,6 +14,7 @@ const Videos = sequelize.define('videos', {
   creator: Sequelize.STRING,
   url: Sequelize.STRING,
   description: Sequelize.STRING,
+  thumbnail: Sequelize.STRING,
 });
 
 const Users = sequelize.define('users', {
@@ -31,6 +32,7 @@ const Rooms = sequelize.define('rooms', {
   indexKey: Sequelize.INTEGER,
   startTime: Sequelize.DATE,
   roomName: Sequelize.STRING,
+  isPrivate: Sequelize.BOOLEAN,
 });
 
 const UsersRooms = sequelize.define('users_rooms', {});
