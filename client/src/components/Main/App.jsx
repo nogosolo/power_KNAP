@@ -1,6 +1,8 @@
 import React from 'react';
 import SiteNavBar from './SiteNavBar';
 import Main from './Main';
+import axios from 'axios';
+
 // import LoginPage from './LoginPage';
 
 class App extends React.Component {
@@ -22,6 +24,12 @@ class App extends React.Component {
 
   createRoom(roomname) {
     console.log('in the app',roomname);
+
+  componentDidMount() {
+    axios.get('/allrooms')
+      .then((data) => {
+        this.setState({allRooms: data});
+      })
   }
 
   render() {
