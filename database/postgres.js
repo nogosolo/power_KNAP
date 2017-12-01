@@ -65,6 +65,7 @@ const incrementIndex = () => Rooms.findById(1).then(room => room.increment('inde
 const resetRoomIndex = () => Rooms.findById(1).then(room => room.update({ indexKey: 0 }));
 const getIndex = () => Rooms.findById(1).then(room => room.dataValues.indexKey);
 const setStartTime = () => Rooms.findById(1).then(room => room.update({ startTime: Date.now() }));
+const getRoomNames = () => Rooms.findAll();
 
 // Video Queries
 const findVideos = () => Videos.findAll();
@@ -78,3 +79,4 @@ exports.getIndex = getIndex;
 exports.setStartTime = setStartTime;
 exports.findVideos = findVideos;
 exports.removeFromPlaylist = removeFromPlaylist;
+exports.getRoomNames = getRoomNames;
