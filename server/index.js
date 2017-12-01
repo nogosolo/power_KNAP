@@ -27,6 +27,10 @@ app.use(passport.session());
 app.use('/auth', authRoutes);
 
 // Room HTTP Requests
+app.get('/allrooms', (req, res) => {
+  console.log('a room request was received');
+  res.end();
+})
 app.get('/renderRoom', (req, res) => {
   console.log('RENDER ROOM')
   const roomProperties = {};
