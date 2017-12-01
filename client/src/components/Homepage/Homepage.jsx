@@ -16,9 +16,9 @@ class Homepage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      roomList: [1,2,3,4,5,6,7,8],
       thumbnail: sampleVideoData[0].snippet.thumbnails.default.url,
       selectedRoom: null,
+      createRoomText: ''
     };
     // this.enterRoom = this.enterRoom.bind(this);
   }
@@ -36,8 +36,10 @@ class Homepage extends React.Component {
     return (
       <div>
         <h1>Browse Rooms</h1>
+        <button onClick={()=> this.props.createRoom(this.state.createRoomText)}>Create Rooms: </button>
+        <input onChange={(e)=> this.setState({createRoomText: e.target.value}) } placeholder={'enter new room name'}/>
           <div className="wrapper">
-            {!this.state.selectedRoom && (this.state.roomList.map((el,key) => <PreviewRoom ex={el} image={this.state.thumbnail}
+            {!this.state.selectedRoom && (this.props.roomList.map((el,key) => <PreviewRoom ex={el.roomName} image={this.state.thumbnail}
             enterRoom={this.props.filterRooms} roomid={key} key={key}/>))}
             {/*this.state.selectedRoom && (<RoomView id={this.state.selectedRoom}/>)*/}
 
