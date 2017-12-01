@@ -32,6 +32,7 @@
         
     };
 
+    // Load the SDK asynchronously
     (function(d, s, id){
        var js, fjs = d.getElementsByTagName(s)[0];
        if (d.getElementById(id)) {return;}
@@ -40,19 +41,6 @@
        fjs.parentNode.insertBefore(js, fjs);
      }(document, 'script', 'facebook-jssdk'));
 
-    function checkLoginState() {
-      FB.getLoginStatus(function(response) {
-        //console.log('FB.getLoginStatus response:', response);
-        if (response.status === 'connected') {
-          document.getElementById('status').innerHTML = 'We are connected.';
-          document.getElementById('login').style.visibility = 'hidden';
-        } else if (response.status === 'not_authorized') {
-          document.getElementById('status').innerHTML = 'We are not logged in.'
-        } else {
-          document.getElementById('status').innerHTML = 'You are not logged into Facebook.';
-        }
-      });
-    }
 
     // login with facebook with extra permissions
     function login() {
@@ -68,6 +56,20 @@
       }, {scope: 'email'});
      }
 
+    // check user's login status
+    function checkLoginState() {
+      FB.getLoginStatus(function(response) {
+        //console.log('FB.getLoginStatus response:', response);
+        if (response.status === 'connected') {
+          document.getElementById('status').innerHTML = 'We are connected.';
+          document.getElementById('login').style.visibility = 'hidden';
+        } else if (response.status === 'not_authorized') {
+          document.getElementById('status').innerHTML = 'We are not logged in.'
+        } else {
+          document.getElementById('status').innerHTML = 'You are not logged into Facebook.';
+        }
+      });
+    }
     // getting basic user info
     function getInfo() {
       FB.api('/me', 'GET', {fields: 'first_name,last_name,name,id,picture.width(150).height(150)'}, function(response) {
