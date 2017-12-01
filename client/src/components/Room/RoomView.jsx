@@ -8,6 +8,8 @@ import VideoPlayer from './VideoPlayer';
 import Playlist from './Playlist';
 import Search from './Search';
 import ChatView from './ChatView';
+let roomSocket;
+
 
 const superUniqueWord = 4;
 class RoomView extends React.Component {
@@ -45,6 +47,7 @@ class RoomView extends React.Component {
     if (!this.state.socketsOpen) {
       axios.get(`/openRoomConnection/USER_ID_WILL_GO_HERE/${superUniqueWord}`)
         .then(() => {
+          roomSocket = io(`/room${superUniqueWord}`);
           this.setState({ socketsOpen: true });
           this.componentDidMount();
         });
