@@ -14,6 +14,7 @@ const Video = sequelize.define('video', {
   creator: Sequelize.STRING,
   url: Sequelize.STRING,
   description: Sequelize.STRING,
+  room: Sequelize.INTEGER,
 });
 
 const Playlist = sequelize.define('playlist', {

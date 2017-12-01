@@ -16,5 +16,4 @@ const SiteNavBar = (props) => (
 )
 
 export default SiteNavBar;
-  //<span className="login">Welcome, put state here <a href="/auth/logout">Logout</a></span>
-  //<span className="login">Login with <a href="/auth/google">Google</a></span>
+

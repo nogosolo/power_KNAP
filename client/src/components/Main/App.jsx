@@ -6,59 +6,25 @@ import Main from './Main';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    // this.toggleLogin = this.toggleLogin.bind(this);
-    // this.searchHandler = this.searchHandler.bind(this);
-    // this.eventSearchClick = this.eventSearchClick.bind(this);
-    // this.setUser = this.setUser.bind(this);
+
     this.state = {
-      // showLogin: false,
-      // searchQuery: '',
-      // alreadyLoggedin: false,
-      // userdata: {
-      //   userid: 0,
-      //   name: '',
-      //   username: '',
-      //   bio: '',
-      //   picture: '',
-      // },
-      // selectedEvent: {},
+      allRooms: null,
+      selectedRoom: null,
     };
+    this.selectRoom = this.selectRoom.bind(this);
   }
-  //
-  // setUser(userdata) {
-  //   this.setState({
-  //     userdata: {
-  //       userid: userdata.userid,
-  //       name: userdata.name,
-  //       username: userdata.username,
-  //       bio: userdata.bio,
-  //       picture: userdata.picture,
-  //     },
-  //     alreadyLoggedin: !this.state.alreadyLoggedin,
-  //     showLogin: false,
-  //   });
-  // }
-  //
-  // searchHandler(query) {
-  //   this.setState({
-  //     searchQuery: query,
-  //   });
-  // }
-  //
-  // toggleLogin() {
-  //   this.setState({ showLogin: !this.state.showLogin });
-  // }
-  //
-  // eventSearchClick(event) {
-  //   console.log(event);
-  //   this.setState({ selectedEvent: event });
-  // }
+
+  selectRoom (id) {
+    console.log('look, a room has been selected');
+    this.setState({selectedRoom: id});
+  }
 
   render() {
     return (
       <div>
         <SiteNavBar />
-        <Main />
+        <Main roomlist={this.state.allRooms} selectedRoom={this.state.selectedRoom}
+        filterRooms={this.selectRoom}/>
 
       </div>
     );
