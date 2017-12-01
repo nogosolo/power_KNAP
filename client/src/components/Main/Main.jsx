@@ -4,7 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 // import SignupPage from './SignupPage';
 // import SearchPage from './SearchPage';
 // import MatchPage from './MatchPage';
-import HomePage from '../Homepage/homepage';
+import HomePage from '../Homepage/Homepage';
 import RoomView from '../Room/RoomView';
 import Javi from '../Homepage/Javi';
 
@@ -16,7 +16,7 @@ import Javi from '../Homepage/Javi';
 const Main = props => (
   <main>
     <Switch>
-      <Route exact path="/" render={() => (<HomePage filterRooms={props.filterRooms}/>)} />
+      <Route exact path="/" render={() => (<HomePage filterRooms={props.filterRooms} roomList={props.roomList} createRoom={props.createRoom}/>  )} />
          <Route
         path="/javi"
         render={() => (<Javi />)}

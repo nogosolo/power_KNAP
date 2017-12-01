@@ -8,10 +8,11 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      allRooms: null,
-      selectedRoom: null,
+      allRooms: [{id:1, roomname:'first'}, {id:2, roomname:'second'}, {id:3, roomname:'third'} ,{id:4, roomname:'fourth'}],
+      selectedRoom: {id:null, roomname:null},
     };
     this.selectRoom = this.selectRoom.bind(this);
+    this.createRoom = this.createRoom.bind(this);
   }
 
   selectRoom (id) {
@@ -19,12 +20,16 @@ class App extends React.Component {
     this.setState({selectedRoom: id});
   }
 
+  createRoom(roomname) {
+    console.log('in the app',roomname);
+  }
+
   render() {
     return (
       <div>
         <SiteNavBar />
-        <Main roomlist={this.state.allRooms} selectedRoom={this.state.selectedRoom}
-        filterRooms={this.selectRoom}/>
+        <Main roomList={this.state.allRooms} selectedRoom={this.state.selectedRoom}
+        filterRooms={this.selectRoom} createRoom={this.createRoom}/>
 
       </div>
     );

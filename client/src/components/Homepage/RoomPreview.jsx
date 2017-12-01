@@ -8,7 +8,7 @@ const PreviewRoom = (props) => {
     props.enterRoom(props.roomid) }}>
     <div className="op">
       <img  className={'pic5'} src={props.image}/>
-      <h1>Room Number {props.ex} </h1>
+      <h1>Room: {props.ex} </h1>
     </div>
   </div>
   )
