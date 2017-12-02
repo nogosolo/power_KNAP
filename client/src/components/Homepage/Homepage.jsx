@@ -21,17 +21,10 @@ class Homepage extends React.Component {
       selectedRoom: null,
       createRoomText: ''
     };
-    // this.enterRoom = this.enterRoom.bind(this);
   }
 
   componentDidMount() {
   }
-
-  // enterRoom(id) {
-  //   console.log('I FOUND THE ROOM ID!', id);
-  //   this.setState({selectedRoom: id})
-  // }
-
 
   render() {
     return (
@@ -41,7 +34,7 @@ class Homepage extends React.Component {
         <input onChange={(e)=> this.setState({createRoomText: e.target.value}) } placeholder={'enter new room name'}/>
           <div className="wrapper">
             {!this.state.selectedRoom && (this.props.roomList.map((el, key) => (<Link id={el.id} key={key} to="/rooms"> <PreviewRoom ex={el.roomName}
-            enterRoom={this.props.enterRooms} roomid={el.id} key={key} thumbnail={el.thumbnail}/> </Link> )))}
+            enterRoom={this.props.selectRoom} roomid={el.id} key={key} thumbnail={el.thumbnail}/> </Link> )))}
             {/*this.state.selectedRoom && (<RoomView id={this.state.selectedRoom}/>)*/}
 
 
