@@ -84,21 +84,22 @@ app.patch('/playNext/:roomId/:length', (req, res) => {
 
 // Room Socket Events
 app.get('/openRoomConnection/:userId/:roomId', (req, res) => {
-console.log(`HELLO FROM ROOM ${req.params.roomId}`)
-if (roomSpace[req.params.roomId] !== undefined) {
+  const { roomId } = req.params;
+console.log(`HELLO FROM ROOM ${roomId}`)
+if (roomSpace[roomId] !== undefined) {
   console.log('test')
-  res.send(`Room Connected to RoomId: ${req.params.roomId}`);
+  res.send(`Room Connected to RoomId: ${roomId}`);
 }
 
-  roomSpace[req.params.roomId] = io.of(`/room${req.params.roomId}`);
-  console.log(roomSpace[req.params.roomId])
+  roomSpace[roomId] = io.of(`/room${roomId}`);
+  console.log(roomSpace[roomId])
 
   let roomHost;
-  const giveHostStatus = host => roomSpace[req.params.roomId].to(host).emit('host');
+  const giveHostStatus = host => roomSpace[roomId].to(host).emit('host');
 
-  roomSpace[req.params.roomId].on('connection', (socket) => {
+  roomSpace[roomId].on('connection', (socket) => {
     console.log(`connected to ${Object.keys(socket.nsp.sockets).length} socket(s)`);
-    roomSpace[req.params.roomId].to(socket.id).emit('id', socket.id);
+    roomSpace[roomId].to(socket.id).emit('id', socket.id);
     if (Object.keys(socket.nsp.sockets).length === 1) {
       // roomHost = socket.id;  //original line
       roomHost = req.params.userId;
@@ -106,20 +107,20 @@ if (roomSpace[req.params.roomId] !== undefined) {
     }
 
     const sendPlaylist = () => (
-      db.findVideos(req.params.roomId)
+      db.findVideos(roomId)
         .then((videos) => {
-          roomSpace[req.params.roomId].emit('retrievePlaylist', videos);
+          roomSpace[roomId].emit('retrievePlaylist', videos);
           if (videos.length === 0) throw videos;
-          if (videos.length === 1) db.setStartTime(req.params.roomId);
+          if (videos.length === 1) db.setStartTime(roomId);
         })
         .catch((emptyPlaylist) => {
           if (Array.isArray(emptyPlaylist)) { // Check if the thrown item is an array rather than an Error
-            roomSpace[req.params.roomId].emit('default');
+            roomSpace[roomId].emit('default');
           } else {
             throw emptyPlaylist;
           }
         })
-        .catch(err => roomSpace[req.params.roomId].emit('error', err))
+        .catch(err => roomSpace[roomId].emit('error', err))
     );
 
     socket.on('saveToPlaylist', (video) => {
@@ -129,14 +130,14 @@ if (roomSpace[req.params.roomId] !== undefined) {
         url: video.id.videoId,
         description: video.snippet.description,
       };
-      return db.createVideoEntry(videoData, req.params.roomId)
+      return db.createVideoEntry(videoData, roomId)
         .then(() => sendPlaylist());
     });
 
     socket.on('removeFromPlaylist', (videoName) => {
-      db.removeFromPlaylist(videoName, req.params.roomId)
+      db.removeFromPlaylist(videoName, roomId)
         .then(() => sendPlaylist())
-        .catch(err => roomSpace[req.params.roomId].emit('error', err));
+        .catch(err => roomSpace[roomId].emit('error', err));
     });
 
     socket.on('emitMessage', (message) => {
@@ -148,17 +149,18 @@ if (roomSpace[req.params.roomId] !== undefined) {
       const colors = ['#ffb3ba', '#ffd2b3', '#fff8b3', '#baffb3', '#bae1ff', '#e8baff'];
       const userColor = colors[(sum % colors.length)];
       message.userColor = userColor;
-      roomSpace[req.params.roomId].emit('pushingMessage', message);
+      roomSpace[roomId].emit('pushingMessage', message);
     });
 
     socket.on('disconnect', () => {
       if (Object.keys(socket.nsp.sockets).length > 0) {
         const newHost = Object.keys(socket.nsp.sockets)[0];
-        console.log(`A user has disconnected from ${roomSpace[req.params.roomId].name}`);
+        console.log(`A user has disconnected from ${roomSpace[roomId].name}`);
         return (newHost === roomHost) ? null : giveHostStatus(newHost);
       }
-      delete roomSpace[req.params.roomId]; // might not need
+      delete roomSpace[roomId]; // might not need
+      console.log('DISCONNECTED!!!!!!!!!!!!!!!!!!!!!!')
     });
   });
-  res.send(`Room Connected to RoomId: ${req.params.roomId}`);
+  res.send(`Room Connected to RoomId: ${roomId}`);
 });

@@ -69,8 +69,8 @@ const setStartTime = roomId => Rooms.findById(roomId).then(room => room.update({
 const getRoomNames = () => Rooms.findAll({ where: { isPrivate: false } });
 
 // Video Queries
-const findVideos = roomId => Videos.findAll({ where: {roomId: roomId}});
-const removeFromPlaylist = (title, roomId) => Videos.find({ where: { videoName: title, roomId: roomId } }).then(video => video.destroy());
+const findVideos = roomId => sequelize.query(`select distinct on ("createdAt") * from videos where "roomId" = ${roomId}`, { type: sequelize.QueryTypes.SELECT});
+const removeFromPlaylist = (title, roomId, createdTime) => Videos.findAll({ where: { videoName: title, roomId: roomId , createdAt: createdTime} }).then(video => video.destroy());
 
 exports.createVideoEntry = createVideoEntry;
 exports.getRoomProperties = getRoomProperties;
