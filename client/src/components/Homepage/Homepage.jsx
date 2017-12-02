@@ -8,6 +8,7 @@ import sampleVideoData from '../../../../database/sampleVideoData.js';
 import RoomView from '../Room/RoomView.jsx';
 import axios from 'axios';
 import PreviewRoom from './RoomPreview.jsx';
+import LoggedIn from './LoggedIn.jsx';
 // import io from 'socket.io-client';
 //
 //
@@ -19,7 +20,7 @@ class Homepage extends React.Component {
     this.state = {
       thumbnail: sampleVideoData[0].snippet.thumbnails.default.url,
       selectedRoom: null,
-      createRoomText: ''
+      loggedIn: true
     };
   }
 
@@ -29,9 +30,9 @@ class Homepage extends React.Component {
   render() {
     return (
       <div>
+        <button onClick={()=> this.setState({loggedIn: !this.state.loggedIn})}>PLACEHOLDER LOG IN BUTTON </button>
+        {this.state.loggedIn ? <LoggedIn  createRoom = {this.props.createRoom}/> : <p>You are not logged in!</p>} 
         <h1>Browse Rooms</h1>
-        <button onClick={()=> this.props.createRoom(this.state.createRoomText)}>Create Rooms: </button>
-        <input onChange={(e)=> this.setState({createRoomText: e.target.value}) } placeholder={'enter new room name'}/>
           <div className="wrapper">
             {!this.state.selectedRoom && (this.props.roomList.map((el, key) => (<Link id={el.id} key={key} to="/rooms"> <PreviewRoom ex={el.roomName}
             enterRoom={this.props.selectRoom} roomid={el.id} key={key} thumbnail={el.thumbnail}/> </Link> )))}
