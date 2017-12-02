@@ -176,7 +176,7 @@ if (roomSpace[roomId] !== undefined) {
 
 app.post('/fbinfo/:id/:firstName/:lastName', (req, res) => {
   console.log('server response fb POST request: ', req.params);
-  db.creatUsers(req.params)
+  db.createUsers(req.params)
   .then(() => res.end());
   // res.end();
 });
