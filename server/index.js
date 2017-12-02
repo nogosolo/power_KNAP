@@ -34,7 +34,7 @@ app.get('/allrooms', (req, res) => {
   db.getRoomNames()
     .then((rooms) => {
       rooms.forEach((room) => {
-        console.log('----------------------', room.dataValues.roomName, '-----------------------------');
+        // console.log('----------------------', room.dataValues.roomName, '-----------------------------');
         allRoomNames.push(room);
       })
     })
@@ -64,7 +64,7 @@ app.get('/search', (req, res) => {
 
 app.patch('/playNext/:roomId/:length', (req, res) => {
   const roomPlaylistLength = Number(req.params.length);
-  console.log('here', req.params.length)
+  // console.log('here', req.params.length)
   const sendIndex = ({ indexKey }) => {
     roomSpace[req.params.roomId].emit('playNext', indexKey);
   };
@@ -82,8 +82,16 @@ app.patch('/playNext/:roomId/:length', (req, res) => {
     .catch(err => res.send(err));
 });
 
+app.post('/createRoom/:roomName', (req, res) => {
+  db.createRoom(req.params.roomName, (data) => {
+    res.sendStatus(201)
+    res.send(data);
+  })
+})
+
 // Room Socket Events
 app.get('/openRoomConnection/:userId/:roomId', (req, res) => {
+
   const { roomId } = req.params;
 console.log(`HELLO FROM ROOM ${roomId}`)
 if (roomSpace[roomId] !== undefined) {
@@ -96,6 +104,7 @@ if (roomSpace[roomId] !== undefined) {
 
   let roomHost;
   const giveHostStatus = host => roomSpace[roomId].to(host).emit('host');
+
 
   roomSpace[roomId].on('connection', (socket) => {
     console.log(`connected to ${Object.keys(socket.nsp.sockets).length} socket(s)`);
@@ -164,3 +173,5 @@ if (roomSpace[roomId] !== undefined) {
   });
   res.send(`Room Connected to RoomId: ${roomId}`);
 });
+
+
