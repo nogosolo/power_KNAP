@@ -1,12 +1,15 @@
 import React from 'react';
-//import axios from 'axios';
+import axios from 'axios';
 
 class FBLoginBtn extends React.Component {
   constructor(props) {
     super(props);
+    this.getFBInfo = this.getFBInfo.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
+  // initialze and setup facebook js sdk
    window.fbAsyncInit = function() {
     FB.init({
       appId      : '168772223720117',
@@ -49,7 +52,7 @@ class FBLoginBtn extends React.Component {
     // app know the current login status of the person.
     if (response.status === 'connected') {
       // Logged into your app and Facebook.
-      this.testAPI();
+      //this.testAPI();
     } else if (response.status === 'not_authorized') {
       // The person is logged into Facebook, but not your app.
       document.getElementById('status').innerHTML = 'Please log ' +
@@ -57,19 +60,47 @@ class FBLoginBtn extends React.Component {
     } else {
       // The person is not logged into Facebook, so we're not sure if
       // they are logged into this app or not.
-      document.getElementById('status').innerHTML = 'Please log ' +
-      'into Facebook.';
+      // document.getElementById('status').innerHTML = 'Please log ' +
+      // 'into Facebook.';
+      alert('Please log into Facebook.');
     }
   }
 
   checkLoginState() {
+    console.log('********checkLoginState');
     FB.getLoginStatus(function(response) {
       this.statusChangeCallback(response);
     }.bind(this));
   }
 
   handleClick() {
+    console.log('clicked');
     FB.login(this.checkLoginState());
+    // FB.login(response => {
+    //   this.checkLoginState();
+    //   console.log('FBLoginBtn response: ', response);
+    //   if (response.authResponse) {
+    //     this.getFBInfo();
+    //   }
+    // });
+  }
+
+  getFBInfo() {
+    FB.api('/me', 'GET', {fields: 'first_name,last_name,name,id,picture.width(150).height(150)'}, function(response) {
+      console.log('get user fb info: ', response);
+
+      axios.post(`/fbinfo/${response.id}/${response.first_name}/${response.last_name}`, {
+        id: response.id,
+        firstName: response.first_name,
+        lastName: response.last_name
+      })
+      .then(function (response) {
+        console.log('axios post success: ',response);
+      })
+      .catch(function (error) {
+        console.log('axios post error: ',error);
+      });
+    });
   }
 
   render() {
@@ -82,7 +113,7 @@ class FBLoginBtn extends React.Component {
         data-show-faces="true" 
         data-auto-logout-link="true" 
         data-use-continue-as="true"
-        onClick={this.handleClick}>
+        onlogin={this.handleClick}>
         </div>
       </div>
     )
