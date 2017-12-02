@@ -49,12 +49,13 @@ Videos.belongsTo(Rooms);
 // UsersRooms.sync({ force: true });
 
 
-const createVideoEntry = (videoData) => {
+const createVideoEntry = (videoData, roomId) => {
   const videoEntry = {
     videoName: videoData.title,
     creator: videoData.creator,
     url: videoData.url,
     description: videoData.description,
+    roomId: roomId,
   };
   return Videos.create(videoEntry); // returns a promise when called
 };
@@ -65,11 +66,11 @@ const incrementIndex = roomId => Rooms.findById(roomId).then(room => room.increm
 const resetRoomIndex = roomId => Rooms.findById(roomId).then(room => room.update({ indexKey: 0 }));
 const getIndex = roomId => Rooms.findById(roomId).then(room => room.dataValues.indexKey);
 const setStartTime = roomId => Rooms.findById(roomId).then(room => room.update({ startTime: Date.now() }));
-const getRoomNames = () => Rooms.findAll();
+const getRoomNames = () => Rooms.findAll({ where: { isPrivate: false } });
 
 // Video Queries
-const findVideos = () => Videos.findAll();
-const removeFromPlaylist = title => Videos.find({ where: { videoName: title } }).then(video => video.destroy());
+const findVideos = roomId => Videos.findAll({ where: {roomId: roomId}});
+const removeFromPlaylist = (title, roomId) => Videos.find({ where: { videoName: title, roomId: roomId } }).then(video => video.destroy());
 
 exports.createVideoEntry = createVideoEntry;
 exports.getRoomProperties = getRoomProperties;

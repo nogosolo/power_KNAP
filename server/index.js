@@ -45,7 +45,7 @@ app.get('/renderRoom/:roomId', (req, res) => {
   console.log(`RENDER ROOM ${req.params.roomId}`)
 
   const roomProperties = {};
-  db.findVideos()
+  db.findVideos(req.params.roomId)
     .then((videos) => { roomProperties.videos = videos; })
     .then(() => db.getRoomProperties(req.params.roomId))
     .then(({ indexKey, startTime }) => {
@@ -106,7 +106,7 @@ if (roomSpace[req.params.roomId] !== undefined) {
     }
 
     const sendPlaylist = () => (
-      db.findVideos()
+      db.findVideos(req.params.roomId)
         .then((videos) => {
           roomSpace[req.params.roomId].emit('retrievePlaylist', videos);
           if (videos.length === 0) throw videos;
@@ -129,12 +129,12 @@ if (roomSpace[req.params.roomId] !== undefined) {
         url: video.id.videoId,
         description: video.snippet.description,
       };
-      return db.createVideoEntry(videoData)
+      return db.createVideoEntry(videoData, req.params.roomId)
         .then(() => sendPlaylist());
     });
 
     socket.on('removeFromPlaylist', (videoName) => {
-      db.removeFromPlaylist(videoName)
+      db.removeFromPlaylist(videoName, req.params.roomId)
         .then(() => sendPlaylist())
         .catch(err => roomSpace[req.params.roomId].emit('error', err));
     });
@@ -157,9 +157,7 @@ if (roomSpace[req.params.roomId] !== undefined) {
         console.log(`A user has disconnected from ${roomSpace[req.params.roomId].name}`);
         return (newHost === roomHost) ? null : giveHostStatus(newHost);
       }
-      const roomName = roomSpace[req.params.roomId].name;
       delete roomSpace[req.params.roomId]; // might not need
-      console.log(`${roomName} is now empty`);
     });
   });
   res.send(`Room Connected to RoomId: ${req.params.roomId}`);
