@@ -64,6 +64,27 @@ const createVideoEntry = (videoData, roomId) => {
   return Videos.create(videoEntry); // returns a promise when called
 };
 
+const createUsers = (user) => {
+  console.log('db user: ', user);
+
+  return Users.findAll({
+    where: {
+      fbId: user.id
+    }
+  })
+  .then(data => {
+    if(!data.length && user.id !== 'undefined') {
+      Users.create({
+        fbId: user.id,
+        firstName: user.firstName,
+        lastName: user.lastName
+      })
+      .then(result => console.log('added user data: ', result))
+      .catch(error => console.log('user db error: ', error))
+    }
+  });
+}
+
 // Room Queries
 const getRoomProperties = roomId => Rooms.findById(roomId).then(room => room.dataValues);
 const incrementIndex = roomId => Rooms.findById(roomId).then(room => room.increment('indexKey'));
@@ -95,4 +116,7 @@ exports.setStartTime = setStartTime;
 exports.findVideos = findVideos;
 exports.removeFromPlaylist = removeFromPlaylist;
 exports.getRoomNames = getRoomNames;
+
 exports.createRoom = createRoom;
+
+exports.createUsers = createUsers;

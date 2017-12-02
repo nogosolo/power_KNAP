@@ -2,6 +2,7 @@ import React from 'react';
 import SiteNavBar from './SiteNavBar';
 import Main from './Main';
 import axios from 'axios';
+import FBInfo from './FBInfo';
 
 
 // import LoginPage from './LoginPage';
@@ -59,7 +60,6 @@ class App extends React.Component {
         <SiteNavBar />
         <Main roomList={this.state.allRooms} selectedRoom={this.state.selectedRoom}
         filterRooms={this.selectRoom} createRoom={this.createRoom}/>
-
       </div>
     );
   }
