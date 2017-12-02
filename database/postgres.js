@@ -66,15 +66,17 @@ const createVideoEntry = (videoData, roomId) => {
 
 const creatUsers = (user) => {
   console.log('db user: ', user);
-  Users.create({
-    fbId: user.id,
-    firstName: user.firstName,
-    lastName: user.lastName
-  })
-  .then(data => {
-    //console.log('added user data ', data);
-  })
-  .catch(error => console.log('user db error ', error))
+  if(user.id !== 'undefined') {
+    Users.create({
+      fbId: user.id,
+      firstName: user.firstName,
+      lastName: user.lastName
+    })
+    .then(data => {
+      //console.log('added user data ', data);
+    })
+    .catch(error => console.log('user db error ', error))
+  }
 }
 
 // Room Queries
