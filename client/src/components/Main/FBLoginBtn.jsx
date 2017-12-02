@@ -31,6 +31,8 @@ class FBLoginBtn extends React.Component {
     js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11&appId=168772223720117';
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
+
+  window.handleClick = this.handleClick;
 }
 
 // Here we run a very simple test of the Graph API after login is
@@ -74,15 +76,15 @@ class FBLoginBtn extends React.Component {
   }
 
   handleClick() {
-    console.log('clicked');
-    FB.login(this.checkLoginState());
-    // FB.login(response => {
-    //   this.checkLoginState();
-    //   console.log('FBLoginBtn response: ', response);
-    //   if (response.authResponse) {
-    //     this.getFBInfo();
-    //   }
-    // });
+    // console.log('clicked');
+    // FB.login(this.checkLoginState());
+    FB.login(response => {
+      this.checkLoginState();
+      console.log('FBLoginBtn response: ', response);
+      if (response.authResponse) {
+        this.getFBInfo();
+      }
+    });
   }
 
   getFBInfo() {
@@ -113,7 +115,7 @@ class FBLoginBtn extends React.Component {
         data-show-faces="true" 
         data-auto-logout-link="true" 
         data-use-continue-as="true"
-        onlogin={this.handleClick}>
+        data-onlogin="handleClick();">
         </div>
       </div>
     )
