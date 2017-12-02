@@ -10,6 +10,7 @@ const PreviewRoom = (props) => {
     <div className="op">
       <img  className={'pic5'} src={props.image}/>
       <h1>Room: {props.ex} </h1>
+      <h3>Currently Playing: {props.title} </h3>
     </div>
   </div>
   )
