@@ -171,7 +171,12 @@ if (roomSpace[roomId] !== undefined) {
       console.log('DISCONNECTED!!!!!!!!!!!!!!!!!!!!!!')
     });
   });
+<<<<<<< HEAD
   res.send(`Room Connected to RoomId: ${roomId}`);
+=======
+  console.log('FUCK YOU BRIAN', JSON.stringify(Object.keys(roomSpace)))
+  res.send(`Room Connected to RoomId: ${req.params.roomId}`);
+>>>>>>> testing sockets
 });
 
 

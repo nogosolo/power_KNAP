@@ -25,7 +25,9 @@ class RoomView extends React.Component {
         message: '',
         username: '',
         user: null,
+
       },
+      count:0,
 
       currentVideo: undefined,
       playlist: [],
@@ -44,6 +46,10 @@ class RoomView extends React.Component {
   }
 
   componentDidMount() {
+    if (this.props.room.id === null) {
+      this.componentDidMount();
+      return;
+    }
     if (!this.state.socketsOpen) {
       axios.get(`/openRoomConnection/USER_ID_WILL_GO_HERE/${this.props.room.id}`)
         .then(() => {
@@ -103,6 +109,11 @@ class RoomView extends React.Component {
   }
 
   addToPlaylist(videos) {
+    this.state.count++;
+    this.setState({count: this.state.count}, ()=>{
+      console.log("COUNTER------------------",this.state.count);
+    });
+
     if (videos.length === 1) {
       this.setState({
         playlist: videos,
