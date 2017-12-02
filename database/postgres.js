@@ -72,7 +72,7 @@ const creatUsers = (user) => {
     lastName: user.lastName
   })
   .then(data => {
-    console.log('added user data ', data);
+    //console.log('added user data ', data);
   })
   .catch(error => console.log('user db error ', error))
 }
