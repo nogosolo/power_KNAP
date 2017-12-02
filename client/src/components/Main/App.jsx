@@ -60,7 +60,6 @@ class App extends React.Component {
         <SiteNavBar />
         <Main roomList={this.state.allRooms} selectedRoom={this.state.selectedRoom}
         filterRooms={this.selectRoom} createRoom={this.createRoom}/>
-        <FBInfo />
       </div>
     );
   }
