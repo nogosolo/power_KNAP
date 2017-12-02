@@ -67,36 +67,22 @@ const createVideoEntry = (videoData, roomId) => {
 const createUsers = (user) => {
   console.log('db user: ', user);
 
-  //if(user.id !== 'undefined') {
-    return Users.findAll({
-      where: {
-        fbId: user.id
-      }
-    })
-    .then(data => {
-      if(!data.length && user.id !== 'undefined') {
-        Users.create({
-          fbId: user.id,
-          firstName: user.firstName,
-          lastName: user.lastName
-        })
-        .then(result => console.log('added user data: ', result))
-        .catch(error => console.log('user db error: ', error))
-      }
-    });
-//};
-
-  // if(user.id !== 'undefined') {
-  //   return Users.create({
-  //     fbId: user.id,
-  //     firstName: user.firstName,
-  //     lastName: user.lastName
-  //   })
-  //   .then(data => {
-  //     //console.log('added user data ', data);
-  //   })
-  //   .catch(error => console.log('user db error ', error))
-  // }
+  return Users.findAll({
+    where: {
+      fbId: user.id
+    }
+  })
+  .then(data => {
+    if(!data.length && user.id !== 'undefined') {
+      Users.create({
+        fbId: user.id,
+        firstName: user.firstName,
+        lastName: user.lastName
+      })
+      .then(result => console.log('added user data: ', result))
+      .catch(error => console.log('user db error: ', error))
+    }
+  });
 }
 
 // Room Queries
