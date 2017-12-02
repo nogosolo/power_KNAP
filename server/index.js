@@ -173,5 +173,3 @@ if (roomSpace[roomId] !== undefined) {
   });
   res.send(`Room Connected to RoomId: ${roomId}`);
 });
-
-

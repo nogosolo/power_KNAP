@@ -11,7 +11,7 @@ import ChatView from './ChatView';
 let roomSocket;
 
 
-const superUniqueWord = 4;
+// const this.props.room.id = 4;
 class RoomView extends React.Component {
   constructor(props) {
     super(props);
@@ -25,7 +25,9 @@ class RoomView extends React.Component {
         message: '',
         username: '',
         user: null,
+
       },
+      count:0,
 
       currentVideo: undefined,
       playlist: [],
@@ -44,10 +46,14 @@ class RoomView extends React.Component {
   }
 
   componentDidMount() {
+    if (this.props.room.id === null) {
+      this.componentDidMount();
+      return;
+    }
     if (!this.state.socketsOpen) {
-      axios.get(`/openRoomConnection/USER_ID_WILL_GO_HERE/${superUniqueWord}`)
+      axios.get(`/openRoomConnection/USER_ID_WILL_GO_HERE/${this.props.room.id}`)
         .then(() => {
-          roomSocket = io(`/room${superUniqueWord}`);
+          roomSocket = io(`/room${this.props.room.id}`);
           this.setState({ socketsOpen: true });
           this.componentDidMount();
         });
@@ -86,7 +92,7 @@ class RoomView extends React.Component {
     // when video has ended
     if (e.data === 0) {
       if (this.state.isHost) {
-        axios.patch(`/playNext/${superUniqueWord}/${this.state.playlist.length - 1}`);
+        axios.patch(`/playNext/${this.props.room.id}/${this.state.playlist.length - 1}`);
       }
       this.setState({
         startOptions: { playerVars: { start: 0 } },
@@ -103,6 +109,11 @@ class RoomView extends React.Component {
   }
 
   addToPlaylist(videos) {
+    this.state.count++;
+    this.setState({count: this.state.count}, ()=>{
+      console.log("COUNTER------------------",this.state.count);
+    });
+
     if (videos.length === 1) {
       this.setState({
         playlist: videos,
@@ -127,7 +138,7 @@ class RoomView extends React.Component {
   }
 
   renderRoom() {
-    return axios.get(`/renderRoom/${superUniqueWord}`)
+    return axios.get(`/renderRoom/${this.props.room.id}`)
       .then(({ data }) => {
         const currentTime = Date.now();
         const timeLapsed = moment.duration(moment(currentTime).diff(data.start)).asSeconds();
