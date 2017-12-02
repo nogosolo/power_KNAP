@@ -40,8 +40,8 @@ class Homepage extends React.Component {
         <button onClick={()=> this.props.createRoom(this.state.createRoomText)}>Create Rooms: </button>
         <input onChange={(e)=> this.setState({createRoomText: e.target.value}) } placeholder={'enter new room name'}/>
           <div className="wrapper">
-            {!this.state.selectedRoom && (this.props.roomList.map((el,key) => (<Link id={el.id} to="/rooms"> <PreviewRoom ex={el.roomName} image={this.state.thumbnail}
-            enterRoom={this.props.enterRooms} roomid={el.id} key={key}/> </Link> )))}
+            {!this.state.selectedRoom && (this.props.roomList.map((el, key) => (<Link id={el.id} key={key} to="/rooms"> <PreviewRoom ex={el.roomName}
+            enterRoom={this.props.enterRooms} roomid={el.id} key={key} thumbnail={el.thumbnail}/> </Link> )))}
             {/*this.state.selectedRoom && (<RoomView id={this.state.selectedRoom}/>)*/}
 
 

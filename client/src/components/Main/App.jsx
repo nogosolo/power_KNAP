@@ -12,7 +12,7 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      allRooms: [{id:1, roomName:'first'}, {id:2, roomName:'second'}, {id:3, roomName:'third'} ,{id:4, roomName:'fourth'}],
+      allRooms: [],//[{id:1, roomName:'first'}, {id:2, roomName:'second'}, {id:3, roomName:'third'} ,{id:4, roomName:'fourth'}],
       selectedRoom: {id:null, roomName:null},
     };
     this.selectRoom = this.selectRoom.bind(this);
@@ -21,7 +21,7 @@ class App extends React.Component {
 
   selectRoom (roomId) {
     // if (this.state.selectedRoom.id === null) {
-      console.log('look, a room has been selected');
+      // console.log('look, a room has been selected');
       this.setState({selectedRoom: {id: roomId},
         // roomName: name
       })
@@ -45,6 +45,7 @@ class App extends React.Component {
       .then((data) => {
         //data = JSON.parse(data);
         console.log('HEY!!!!!!!!', data);
+        //console.log('data.data[1].thumbnail: ', data.data[1].thumbnail);
         this.setState({allRooms: data.data.reverse()});
       })
       .catch((err) => {console.log(err)})

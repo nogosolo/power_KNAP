@@ -34,7 +34,6 @@ app.get('/allrooms', (req, res) => {
   db.getRoomNames()
     .then((rooms) => {
       rooms.forEach((room) => {
-        // console.log('----------------------', room.dataValues.roomName, '-----------------------------');
         allRoomNames.push(room);
       })
     })
@@ -138,6 +137,7 @@ if (roomSpace[roomId] !== undefined) {
         creator: video.snippet.channelTitle,
         url: video.id.videoId,
         description: video.snippet.description,
+        thumbnail: video.snippet.thumbnails.default.url,
       };
       return db.createVideoEntry(videoData, roomId)
         .then(() => sendPlaylist());
