@@ -60,6 +60,7 @@ const createVideoEntry = (videoData, roomId) => {
     url: videoData.url,
     description: videoData.description,
     roomId: roomId,
+    thumbnail: videoData.thumbnail,
   };
   return Videos.create(videoEntry); // returns a promise when called
 };
@@ -91,7 +92,12 @@ const incrementIndex = roomId => Rooms.findById(roomId).then(room => room.increm
 const resetRoomIndex = roomId => Rooms.findById(roomId).then(room => room.update({ indexKey: 0 }));
 const getIndex = roomId => Rooms.findById(roomId).then(room => room.dataValues.indexKey);
 const setStartTime = roomId => Rooms.findById(roomId).then(room => room.update({ startTime: Date.now() }));
-const getRoomNames = () => Rooms.findAll({ where: { isPrivate: false } });
+//const getRoomNames = () => Rooms.findAll({ where: { isPrivate: false } });
+const getRoomNames = () => {return sequelize.query(`SELECT distinct on (r.id) r.*, v.thumbnail FROM rooms r
+LEFT JOIN videos v
+    ON v."roomId" = r.id
+WHERE r."isPrivate" is FALSE`, { type: sequelize.QueryTypes.SELECT})};
+
 
 const createRoom = (roomName, cb) => {
   Rooms.create({indexKey: 0, startTime: sequelize.fn('NOW'), roomName: `'${roomName}'`, isPrivate: false})

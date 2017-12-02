@@ -12,7 +12,7 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      allRooms: [{id:1, roomName:'first'}, {id:2, roomName:'second'}, {id:3, roomName:'third'} ,{id:4, roomName:'fourth'}],
+      allRooms: [],//[{id:1, roomName:'first'}, {id:2, roomName:'second'}, {id:3, roomName:'third'} ,{id:4, roomName:'fourth'}],
       selectedRoom: {id:null, roomName:null},
     };
     this.selectRoom = this.selectRoom.bind(this);
@@ -20,13 +20,8 @@ class App extends React.Component {
   }
 
   selectRoom (roomId) {
-    // if (this.state.selectedRoom.id === null) {
-      console.log('look, a room has been selected');
       this.setState({selectedRoom: {id: roomId},
-        // roomName: name
       })
-      // this.selectRoom(this.state.selectedRoom.id, this.state.selectedRoom.roomName);
-    // }
   }
 
   createRoom(roomName) {
@@ -43,7 +38,6 @@ class App extends React.Component {
   getAllRooms() {
     axios.get('/allrooms')
       .then((data) => {
-        //data = JSON.parse(data);
         console.log('HEY!!!!!!!!', data);
         this.setState({allRooms: data.data.reverse()});
       })
@@ -59,7 +53,8 @@ class App extends React.Component {
       <div>
         <SiteNavBar />
         <Main roomList={this.state.allRooms} selectedRoom={this.state.selectedRoom}
-        filterRooms={this.selectRoom} createRoom={this.createRoom}/>
+        selectRoom={this.selectRoom} createRoom={this.createRoom}/>
+
       </div>
     );
   }
