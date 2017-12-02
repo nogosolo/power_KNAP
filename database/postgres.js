@@ -64,6 +64,19 @@ const createVideoEntry = (videoData, roomId) => {
   return Videos.create(videoEntry); // returns a promise when called
 };
 
+const creatUsers = (user) => {
+  console.log('db user: ', user);
+  Users.create({
+    fbId: user.id,
+    firstName: user.firstName,
+    lastName: user.lastName
+  })
+  .then(data => {
+    console.log('added user data ', data);
+  })
+  .catch(error => console.log('user db error ', error))
+}
+
 // Room Queries
 const getRoomProperties = roomId => Rooms.findById(roomId).then(room => room.dataValues);
 const incrementIndex = roomId => Rooms.findById(roomId).then(room => room.increment('indexKey'));
@@ -96,3 +109,4 @@ exports.findVideos = findVideos;
 exports.removeFromPlaylist = removeFromPlaylist;
 exports.getRoomNames = getRoomNames;
 exports.createRoom = createRoom;
+exports.creatUsers = creatUsers;
