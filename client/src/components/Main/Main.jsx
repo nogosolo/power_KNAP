@@ -16,7 +16,8 @@ import Javi from '../Homepage/Javi';
 const Main = props => (
   <main>
     <Switch>
-      <Route exact path="/" render={() => (<HomePage selectRoom={props.selectRoom} roomList={props.roomList} createRoom={props.createRoom}/>  )} />
+      <Route exact path="/" render={() => (<HomePage selectRoom={props.selectRoom} roomList={props.roomList} createRoom={props.createRoom} fbId={props.fbId} />  )} />
+
          <Route
         path="/javi"
         render={() => (<Javi />)}
