@@ -116,6 +116,15 @@ const createRoom = (params, cb) => {
 const findVideos = roomId => sequelize.query(`select distinct on (date_trunc('second', "createdAt")) * from videos where "roomId" = ${roomId}`, { type: sequelize.QueryTypes.SELECT});
 const removeFromPlaylist = (title, roomId, createdTime) => Videos.findAll({ where: { videoName: title, roomId: roomId , createdAt: createdTime} }).then(video => video.destroy());
 
+// UsersRooms Queries
+const hostStatus = (roomId, fbId) => sequelize.query(`SELECT * FROM users_rooms ur
+INNER JOIN users u
+  ON u.id = ur."userId"
+WHERE ur."roomId" = ${roomId}
+AND u."fbId" = '${fbId}'
+AND ur."isRoomHost" IS TRUE`, { type: sequelize.QueryTypes.SELECT});
+
+
 exports.createVideoEntry = createVideoEntry;
 exports.getRoomProperties = getRoomProperties;
 exports.incrementIndex = incrementIndex;
@@ -125,7 +134,6 @@ exports.setStartTime = setStartTime;
 exports.findVideos = findVideos;
 exports.removeFromPlaylist = removeFromPlaylist;
 exports.getRoomNames = getRoomNames;
-
 exports.createRoom = createRoom;
-
 exports.createUsers = createUsers;
+exports.hostStatus = hostStatus;
