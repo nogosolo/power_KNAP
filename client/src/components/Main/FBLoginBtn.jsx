@@ -65,6 +65,7 @@ class FBLoginBtn extends React.Component {
       // document.getElementById('status').innerHTML = 'Please log ' +
       // 'into Facebook.';
       //*************************alert('Please log into Facebook.');
+
     }
   }
 
@@ -113,12 +114,12 @@ class FBLoginBtn extends React.Component {
   render() {
     return(
       <div id="fb-root">
-        <div class="fb-login-button" 
-        data-max-rows="1" 
-        data-size="large" 
-        data-button-type="login_with" 
-        data-show-faces="true" 
-        data-auto-logout-link="true" 
+        <div class="fb-login-button"
+        data-max-rows="1"
+        data-size="large"
+        data-button-type="login_with"
+        data-show-faces="true"
+        data-auto-logout-link="true"
         data-use-continue-as="true"
         data-onlogin="handleClick();">
         </div>
@@ -128,4 +129,3 @@ class FBLoginBtn extends React.Component {
 }
 
 export default FBLoginBtn;
-  

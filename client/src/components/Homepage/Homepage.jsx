@@ -29,7 +29,7 @@ class Homepage extends React.Component {
   render() {
     return (
       <div>
-        {this.props.fbId !== null ? <LoggedIn  createRoom = {this.props.createRoom}/> : <p>You are not logged in!</p>} 
+        {this.props.fbId !== null ? <LoggedIn  createRoom = {this.props.createRoom}/> : <p>You are not logged in!</p>}
         <h1>Browse Rooms</h1>
           <div className="wrapper">
             {!this.state.selectedRoom && (this.props.roomList.map((el, key) => (<Link id={el.id} key={key} to="/rooms"> <PreviewRoom ex={el.roomName}
