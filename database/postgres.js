@@ -99,12 +99,15 @@ LEFT JOIN videos v
 WHERE r."isPrivate" is FALSE`, { type: sequelize.QueryTypes.SELECT})};
 
 
-const createRoom = (roomName, cb) => {
-  Rooms.create({indexKey: 0, startTime: sequelize.fn('NOW'), roomName: `'${roomName}'`, isPrivate: false})
+const createRoom = (params, cb) => {
+  // console.log('-----------------params in create room db helper', params)
+  Rooms.create({indexKey: 0, startTime: sequelize.fn('NOW'), roomName: `${params.roomName}`, isPrivate: false, userId: params.userId})
   .then((data) => {
-  // console.log('!!!!!!', data.dataValues.id)
-  console.log('added:', roomName )
-  cb(data.dataValues.id)
+    Users.findAll({ where: { fbId: params.fbId}})
+    .then((userData) => {
+      UsersRooms.create({isRoomHost: true,  roomId: data.id, userId: userData[0].id});
+      cb(data.dataValues.id)
+    })
   })
   .catch(error => console.log(error))
 }

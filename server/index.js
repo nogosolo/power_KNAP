@@ -81,8 +81,8 @@ app.patch('/playNext/:roomId/:length', (req, res) => {
     .catch(err => res.send(err));
 });
 
-app.post('/createRoom/:roomName', (req, res) => {
-  db.createRoom(req.params.roomName, (data) => {
+app.post('/createRoom/:roomName/:fbId', (req, res) => {
+  db.createRoom(req.params, (data) => {
     res.sendStatus(201)
     res.send(data);
   })

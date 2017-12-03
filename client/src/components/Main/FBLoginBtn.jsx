@@ -64,7 +64,7 @@ class FBLoginBtn extends React.Component {
       // they are logged into this app or not.
       // document.getElementById('status').innerHTML = 'Please log ' +
       // 'into Facebook.';
-      alert('Please log into Facebook.');
+      //*************************alert('Please log into Facebook.');
     }
   }
 
@@ -82,14 +82,19 @@ class FBLoginBtn extends React.Component {
       this.checkLoginState();
       console.log('FBLoginBtn response: ', response);
       if (response.authResponse) {
-        this.getFBInfo();
+        ////////////////////////// javi adding
+        this.getFBInfo((data)=>{
+          this.props.fbLoginSuccessful(data)
+        });
       }
     });
   }
 
-  getFBInfo() {
+  getFBInfo(callback) {
     FB.api('/me', 'GET', {fields: 'first_name,last_name,name,id,picture.width(150).height(150)'}, function(response) {
       console.log('get user fb info: ', response);
+      callback(response)
+      //
 
       axios.post(`/fbinfo/${response.id}/${response.first_name}/${response.last_name}`, {
         id: response.id,

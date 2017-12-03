@@ -10,7 +10,7 @@ const SiteNavBar = (props) => (
     <a class="active"><Link to="/" >Home</Link></a>
     <a ><Link to="/rooms">Room</Link></a>
     <a ><Link to="/javi">JAVI LINK</Link></a>
-    <a class="fbbtn"><FBLoginBtn /></a>
+    <a class="fbbtn"><FBLoginBtn fbLoginSuccessful={props.fbLoginSuccessful}/></a>
   </div>
 </div>
 )

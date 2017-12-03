@@ -20,7 +20,6 @@ class Homepage extends React.Component {
     this.state = {
       thumbnail: sampleVideoData[0].snippet.thumbnails.default.url,
       selectedRoom: null,
-      loggedIn: true
     };
   }
 
@@ -30,8 +29,7 @@ class Homepage extends React.Component {
   render() {
     return (
       <div>
-        <button onClick={()=> this.setState({loggedIn: !this.state.loggedIn})}>PLACEHOLDER LOG IN BUTTON </button>
-        {this.state.loggedIn ? <LoggedIn  createRoom = {this.props.createRoom}/> : <p>You are not logged in!</p>} 
+        {this.props.fbId !== null ? <LoggedIn  createRoom = {this.props.createRoom}/> : <p>You are not logged in!</p>} 
         <h1>Browse Rooms</h1>
           <div className="wrapper">
             {!this.state.selectedRoom && (this.props.roomList.map((el, key) => (<Link id={el.id} key={key} to="/rooms"> <PreviewRoom ex={el.roomName}

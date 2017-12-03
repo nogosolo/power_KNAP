@@ -184,7 +184,7 @@ class RoomView extends React.Component {
 
     return (
       <div className="room">
-        <div className="container navbar">ferret{view}</div>
+        <div className="container navbar">ferrets</div>
         {playlistComponent}
         <VideoPlayer
           currentVideo={this.state.currentVideo}
