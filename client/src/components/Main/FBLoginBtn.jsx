@@ -64,11 +64,8 @@ class FBLoginBtn extends React.Component {
       // they are logged into this app or not.
       // document.getElementById('status').innerHTML = 'Please log ' +
       // 'into Facebook.';
-<<<<<<< HEAD
       //*************************alert('Please log into Facebook.');
-=======
-      // alert('Please log into Facebook.');
->>>>>>> made room link default to room 1
+
     }
   }
 

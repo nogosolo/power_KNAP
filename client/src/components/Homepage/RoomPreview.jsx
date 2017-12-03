@@ -8,7 +8,7 @@ const PreviewRoom = (props) => {
   }
 }>
     <div className="op">
-      <img  className={'pic5'} src={props.thumbnail}/>
+      <img  className={'pic5'} src={props.thumbnail ? props.thumbnail : 'https://fthmb.tqn.com/YkPnUnVlh2QwHrvyub2XzLsDID4=/735x0/ferret-face-56a2bd1b5f9b58b7d0cdfa14.jpg'}/>
       <h1>Room: {props.ex} </h1>
       {
         /*
