@@ -57,6 +57,13 @@ class RoomView extends React.Component {
           this.setState({ socketsOpen: true });
           this.componentDidMount();
         });
+      axios.get(`/isHost/${this.props.fbId}/${this.props.room.id}`)
+        .then((hostStatus) => {
+          console.log(hostStatus)
+          console.log(typeof hostStatus)
+          this.setState({ isHost: hostStatus });
+        })
+
     } else {
       if (cookie.parse(document.cookie).user) {
         this.setState({ user: cookie.parse(document.cookie).user })

@@ -40,6 +40,19 @@ app.get('/allrooms', (req, res) => {
     .then(() => {res.end(JSON.stringify(allRoomNames))});
 })
 
+app.get('/isHost/:fbId/:roomId', (req, res) => {
+
+  db.hostStatus(req.params.roomId, req.params.fbId)
+    .then((data) => {
+      if (data.length) {
+        res.json(true);
+      } else {
+        res.json(false);
+      }
+    })
+    .catch(() => res.sendStatus(404))
+})
+
 app.get('/renderRoom/:roomId', (req, res) => {
   console.log(`RENDER ROOM ${req.params.roomId}`)
 
